@@ -5,8 +5,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-@EnableWebMvc
-@ComponentScan(basePackages={"br.com.casadocodigo.loja.controllers"})
+/**
+ * Classe que será usada como classe de configuração do servlet do SpringMVC.
+ * */
+
+@EnableWebMvc //Habilita o SpringMVC
+@ComponentScan(basePackages={"br.com.casadocodigo.loja.controllers","br.com.casadocodigo.loja.daos"}) // Classes que serão mapeadas pelo Spring...
 public class AppWebConfiguration {
 	
 	@Bean
