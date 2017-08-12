@@ -10,7 +10,9 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  * */
 
 @EnableWebMvc //Habilita o SpringMVC
-@ComponentScan(basePackages={"br.com.casadocodigo.loja.controllers","br.com.casadocodigo.loja.daos"}) // Classes que serão mapeadas pelo Spring...
+@ComponentScan(basePackages={"br.com.casadocodigo.loja.controllers",
+							 "br.com.casadocodigo.loja.daos",
+							 "br.com.casadocodigo.loja.services"}) // Classes que serão mapeadas pelo Spring...
 public class AppWebConfiguration {
 	
 	@Bean

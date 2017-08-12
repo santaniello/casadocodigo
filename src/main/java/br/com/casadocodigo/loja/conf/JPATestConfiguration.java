@@ -20,7 +20,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement 
-@ComponentScan(basePackages={"br.com.casadocodigo.loja.daos","br.com.casadocodigo.loja.repositories"})
+@ComponentScan(basePackages={"br.com.casadocodigo.loja.daos",
+							 "br.com.casadocodigo.loja.repositories",
+							 "br.com.casadocodigo.loja.services"})
 /** 
  * Configurando o Spring Data...
  * 
