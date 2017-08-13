@@ -1,5 +1,7 @@
 package br.com.casadocodigo.loja.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,4 +17,10 @@ public class ProdutoService {
 	public void gravar(Produto produto){
 		produtoDao.gravar(produto);
 	}
+	
+	public List<Produto> listar(){
+		return produtoDao.listar();
+	}
+	
+	
 }
