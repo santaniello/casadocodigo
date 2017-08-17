@@ -1,7 +1,9 @@
 package br.com.casadocodigo.loja.conf;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -21,6 +23,19 @@ public class AppWebConfiguration {
 	    resolver.setPrefix("/WEB-INF/views/");
 	    resolver.setSuffix(".jsp");
 	    return resolver;
+	}
+	
+	/**
+	 * Método que carregará nossos arquivos de mensagens de validação...
+	 * 
+	 * */	
+	@Bean
+	public MessageSource messageSource(){
+	    ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+	    messageSource.setBasename("/WEB-INF/messages"); // informando aonde está nosso arquivo
+	    messageSource.setDefaultEncoding("UTF-8");
+	    messageSource.setCacheSeconds(1); // Tempo que o Spring fará cache do arquivo...
+	    return messageSource;
 	}
 
 }
