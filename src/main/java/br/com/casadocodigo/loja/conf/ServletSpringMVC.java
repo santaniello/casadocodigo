@@ -1,6 +1,8 @@
 package br.com.casadocodigo.loja.conf;
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -33,14 +35,13 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 		return new String[] { "/" };
 	}
 
-	
 	/**
 	 * Resolvendo o problema de encoding da aplicação utilizando filtros...
 	 * 
-	 * método  usado pelo Spring que espera receber um array de filtros. 
-	 * Então vamos criar um  CharacterEncodingFilter, definir o encoding
-	 * deste filtro usando  o valor "UTF-8", adicionar este filtro ao 
-	 * array de filtros e o retornar esse array para o Spring.
+	 * método usado pelo Spring que espera receber um array de filtros. Então
+	 * vamos criar um CharacterEncodingFilter, definir o encoding deste filtro
+	 * usando o valor "UTF-8", adicionar este filtro ao array de filtros e o
+	 * retornar esse array para o Spring.
 	 * 
 	 **/
 	@Override
@@ -50,4 +51,8 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 		return new Filter[] { encodingFilter };
 	}
 
+	@Override
+	protected void customizeRegistration(Dynamic registration) {
+		registration.setMultipartConfig(new MultipartConfigElement(""));
+	}
 }
