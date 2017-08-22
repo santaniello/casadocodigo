@@ -1,6 +1,7 @@
 package br.com.casadocodigo.loja.models;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Produto {
@@ -31,7 +34,13 @@ public class Produto {
 	 */
 	@ElementCollection
 	private List<Preco> precos = new ArrayList<Preco>();
-
+	
+	/* O Spring faz a conversão do texto do form para uma data
+	*  no formato dd/MM/yyyy com a anotação @DateTimeFormat(pattern="dd/MM/yyyy") 
+	*/
+	@DateTimeFormat // não precisamos colocar o pattern pois configuramos na classe AppWebConfiguration
+	private Calendar dataLancamento;
+	
 	public Long getId() {
 		return id;
 	}
@@ -70,6 +79,14 @@ public class Produto {
 
 	public void adicionaPreco(Preco precos) {
 		this.precos.add(precos);
+	}
+		
+	public Calendar getDataLancamento() {
+		return dataLancamento;
+	}
+
+	public void setDataLancamento(Calendar dataLancamento) {
+		this.dataLancamento = dataLancamento;
 	}
 
 	@Override

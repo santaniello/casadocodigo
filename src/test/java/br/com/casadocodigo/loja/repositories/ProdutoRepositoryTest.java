@@ -2,6 +2,7 @@ package br.com.casadocodigo.loja.repositories;
 
 import static org.junit.Assert.*;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Test;
@@ -31,8 +32,8 @@ public class ProdutoRepositoryTest {
 		ProdutoBuilder produtoBuilder = new ProdutoBuilder("Design Patters com Java", 
 				 										   "Livro sobre Design Patters com Java",
 				 										    444,
-				 										    new Preco("59.00",TipoPreco.COMBO));		
-		Produto produtoSaved = produtoRepository.save(produtoBuilder.build());		
+				 										    new Preco("59.00",TipoPreco.COMBO), Calendar.getInstance());		
+		Produto produtoSaved = produtoRepository.save(produtoBuilder.constroi());		
 		assertNotNull("O produto salvo   não pode ser nulo!",produtoSaved);
 		assertNotNull("A lista de preços não pode ser nula!",produtoSaved.getPrecos().get(0));			
 	}
@@ -42,8 +43,8 @@ public class ProdutoRepositoryTest {
 		ProdutoBuilder produtoBuilder = new ProdutoBuilder("Design Patters com Java", 
 				 										   "Livro sobre Design Patters com Java",
 				 										    444,
-				 										    new Preco("59.00",TipoPreco.COMBO));		
-		Produto produtoSaved = produtoRepository.save(produtoBuilder.build());		
+				 										    new Preco("59.00",TipoPreco.COMBO), Calendar.getInstance());		
+		Produto produtoSaved = produtoRepository.save(produtoBuilder.constroi());		
 		
 		assertNotNull("O produto salvo   não pode ser nulo!",produtoSaved);
 		assertNotNull("A lista de preços não pode ser nula!",produtoSaved.getPrecos().get(0));

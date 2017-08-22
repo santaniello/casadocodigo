@@ -4,6 +4,10 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.format.datetime.DateFormatter;
+import org.springframework.format.datetime.DateFormatterRegistrar;
+import org.springframework.format.support.DefaultFormattingConversionService;
+import org.springframework.format.support.FormattingConversionService;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -37,5 +41,19 @@ public class AppWebConfiguration {
 	    messageSource.setCacheSeconds(1); // Tempo que o Spring fará cache do arquivo...
 	    return messageSource;
 	}
-
+	
+	/**
+	 * Esse método seta o padrão de data deafult para nossa aplicação
+	 * eliminando a necessidade de colocar o pattern dd/MM/yyyy na 
+	 * anotação @DateTimeFormat(pattern="dd/MM/yyyy") ficando apenas 
+	 * @DateTimeFormat
+	 * */	
+	@Bean
+	public FormattingConversionService mvcConversionService(){
+	    DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
+	    DateFormatterRegistrar formatterRegistrar = new DateFormatterRegistrar();
+	    formatterRegistrar.setFormatter(new DateFormatter("dd/MM/yyyy"));
+	    formatterRegistrar.registerFormatters(conversionService);
+	    return conversionService;
+	}
 }

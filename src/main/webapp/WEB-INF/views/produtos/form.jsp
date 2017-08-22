@@ -13,27 +13,32 @@
 <!-- Usando a Tag Form do Spring -->
 <!-- No MVC url, PC significa ProdutosController (Ele pega pelas iniciais) e #gravar -->
 <!-- é o método que vamos acessar no controller e build para  nós construirmos a url... -->
-<form:form action="${s:mvcUrl('PC#gravar').build()}" method="post" commandName="produto">
+<form:form action="${ s:mvcUrl('PC#gravar').build() }" method="post" commandName="produto">
     <div>
         <label>Título</label> 
-        <input type="text" name="titulo" />
+        <form:input path="titulo" />
         <form:errors path="titulo" />
     </div>
     <div>
-        <label>Descrição</label>
-        <textarea rows="10" cols="20" name="descricao"></textarea>
+        <label>descricao</label>
+        <form:textarea rows="10" cols="20" path="descricao" />
         <form:errors path="descricao" />
     </div>
     <div>
         <label>Páginas</label>
-        <input type="text" name="paginas" />
+        <form:input path="paginas" />
         <form:errors path="paginas" /> 
+    </div>
+    <div>
+        <label>Data de Lançamento</label>
+        <form:input path="dataLancamento" />
+        <form:errors path="dataLancamento" />
     </div>
     <c:forEach items="${tipos}" var="tipoPreco" varStatus="status">
         <div>
-            <label>${tipoPreco}</label> <input type="text"
-                name="precos[${status.index}].valor" /> <input type="hidden"
-                name="precos[${status.index}].tipo" value="${tipoPreco}" />
+            <label>${tipoPreco}</label> 
+            <form:input path="precos[${status.index}].valor" /> 
+            <form:hidden path="precos[${status.index}].tipo" value="${tipoPreco}" />
         </div>
     </c:forEach>
     <button type="submit">Cadastrar</button>
