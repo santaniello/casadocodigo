@@ -29,27 +29,48 @@ public class ProdutoRepositoryTest {
 
 	@Test
 	public void testSaveProduto() {
-		ProdutoBuilder produtoBuilder = new ProdutoBuilder("Design Patters com Java", 
-				 										   "Livro sobre Design Patters com Java",
-				 										    444,
-				 										    new Preco("59.00",TipoPreco.COMBO), Calendar.getInstance());		
-		Produto produtoSaved = produtoRepository.save(produtoBuilder.constroi());		
-		assertNotNull("O produto salvo   não pode ser nulo!",produtoSaved);
-		assertNotNull("A lista de preços não pode ser nula!",produtoSaved.getPrecos().get(0));			
+		ProdutoBuilder builder = new ProdutoBuilder().comTitulo("Java 8")
+				.comDescricao("Aprendendo Java 8")
+				.comPaginas(444)
+				.comDataLancamento(Calendar.getInstance())
+				.comPreco(new Preco("59.00",TipoPreco.COMBO));
+		
+		Produto produtoSalvo = produtoRepository.save(builder.constroi());		
+		assertNotNull("O produto salvo   não pode ser nulo!",produtoSalvo);
+		assertNotNull("A lista de preços não pode ser nula!",produtoSalvo.getPrecos().get(0));			
 	}
 	
 	@Test
 	public void testlistaTodosOsProdutos() {
-		ProdutoBuilder produtoBuilder = new ProdutoBuilder("Design Patters com Java", 
-				 										   "Livro sobre Design Patters com Java",
-				 										    444,
-				 										    new Preco("59.00",TipoPreco.COMBO), Calendar.getInstance());		
-		Produto produtoSaved = produtoRepository.save(produtoBuilder.constroi());		
+		ProdutoBuilder builder = new ProdutoBuilder().comTitulo("Java 8")
+				.comDescricao("Aprendendo Java 8")
+				.comPaginas(444)
+				.comDataLancamento(Calendar.getInstance())
+				.comPreco(new Preco("59.00",TipoPreco.COMBO));
 		
-		assertNotNull("O produto salvo   não pode ser nulo!",produtoSaved);
-		assertNotNull("A lista de preços não pode ser nula!",produtoSaved.getPrecos().get(0));
+		Produto produtoSalvo = produtoRepository.save(builder.constroi());		
+		
+		assertNotNull("O produto salvo   não pode ser nulo!",produtoSalvo);
+		assertNotNull("A lista de preços não pode ser nula!",produtoSalvo.getPrecos().get(0));
 		
 		List<Produto> produtos = produtoRepository.findAll();		
 		assertTrue("A lista de produtos deve ser maior que 0!", produtos.size() > 0);		
+	}
+	
+	@Test
+	public void testBuscaProdutoPorId(){
+		 ProdutoBuilder builder = new ProdutoBuilder().comTitulo("Java 8")
+		.comDescricao("Aprendendo Java 8")
+		.comPaginas(444)
+		.comDataLancamento(Calendar.getInstance())
+		.comPreco(new Preco("59.00",TipoPreco.COMBO));
+				
+		Produto produtoSalvo = produtoRepository.save(builder.constroi());		
+		
+		assertNotNull("O produto salvo   não pode ser nulo!",produtoSalvo);
+		assertNotNull("A lista de preços não pode ser nula!",produtoSalvo.getPrecos().get(0));
+		 
+		Produto produtoEncontrado = produtoRepository.findOne(produtoSalvo.getId());
+		assertNotNull("O produto buscado  não pode ser nulo!",produtoEncontrado);
 	}	
 }

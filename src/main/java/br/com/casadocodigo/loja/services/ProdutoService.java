@@ -21,6 +21,8 @@ public class ProdutoService {
 	public List<Produto> listar(){
 		return produtoDao.listar();
 	}
-	
-	
+
+	public Produto find(long id) {
+		return produtoDao.find(id);		
+	}	
 }

@@ -16,12 +16,12 @@ public class FileUpload {
 	private HttpServletRequest request;
 
 	public String upload(String baseFolder, MultipartFile file) {
+		// TODO criar teste para esse método...		
 		try {
 			String realPath = request.getServletContext().getRealPath("/" + baseFolder);
 			String path = realPath + "/" + file.getOriginalFilename();
 			file.transferTo(new File(path));
 			return baseFolder + "/" + file.getOriginalFilename();
-
 		} catch (IllegalStateException | IOException e) {
 			throw new RuntimeException(e);
 		}

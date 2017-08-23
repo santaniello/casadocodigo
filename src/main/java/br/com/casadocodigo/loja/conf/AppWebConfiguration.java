@@ -11,6 +11,8 @@ import org.springframework.format.support.FormattingConversionService;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
@@ -22,7 +24,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 								"br.com.casadocodigo.loja.daos",
 								"br.com.casadocodigo.loja.services",
 								"br.com.casadocodigo.loja.infra"}) // Classes que serão mapeadas pelo Spring...
-public class AppWebConfiguration {
+public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver() {
@@ -76,5 +78,22 @@ public class AppWebConfiguration {
 	public MultipartResolver multipartResolver() {
 		return new StandardServletMultipartResolver();
 	}
-
+	
+	/**
+	 * Configuração dos arquivos estaticos no Spring...
+	 * 
+	 * Substitui a linha:
+	 * 
+	 * <!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+	 *	up static resources in the ${webappRoot}/resources directory -->
+	 *	
+	 *	<resources mapping="/resources/**" location="/resources/" />
+	 * 
+	 * */	
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+          .addResourceHandler("/resources/**")
+          .addResourceLocations("/resources/"); 
+    }
 }
