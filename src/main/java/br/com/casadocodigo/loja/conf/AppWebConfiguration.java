@@ -23,7 +23,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackages = { "br.com.casadocodigo.loja.controllers", 
 								"br.com.casadocodigo.loja.daos",
 								"br.com.casadocodigo.loja.services",
-								"br.com.casadocodigo.loja.infra"}) // Classes que serão mapeadas pelo Spring...
+								"br.com.casadocodigo.loja.infra",
+								"br.com.casadocodigo.loja.models"}) // Classes que serão mapeadas pelo Spring...
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean
@@ -31,6 +32,8 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
+		// Estamos expondo a nossa bean para ser acessada nas views da nossa aplicação...
+		resolver.setExposedContextBeanNames("carrinhoCompras");
 		return resolver;
 	}
 
@@ -41,11 +44,9 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-		messageSource.setBasename("/WEB-INF/messages"); // informando aonde está
-														// nosso arquivo
+		messageSource.setBasename("/WEB-INF/messages"); // informando aonde está nosso arquivo
 		messageSource.setDefaultEncoding("UTF-8");
-		messageSource.setCacheSeconds(1); // Tempo que o Spring fará cache do
-											// arquivo...
+		messageSource.setCacheSeconds(1); // Tempo que o Spring fará cache do arquivo...
 		return messageSource;
 	}
 
