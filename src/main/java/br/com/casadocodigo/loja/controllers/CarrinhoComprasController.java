@@ -34,11 +34,17 @@ public class CarrinhoComprasController {
 	
 	@RequestMapping(value="/add", method = RequestMethod.POST)
 	public ModelAndView add(Integer produtoId, TipoPreco tipo){
-	    ModelAndView modelAndView = new ModelAndView("redirect:/produtos");
+	    ModelAndView modelAndView = new ModelAndView("redirect:/carrinho");
 	    CarrinhoItem carrinhoItem = criaItem(produtoId, tipo);
 	    carrinho.add(carrinhoItem);
 	    return modelAndView;
 	}	
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ModelAndView itens(){
+		return new ModelAndView("carrinho/itens");
+	}
+	
 	
 	private CarrinhoItem criaItem(Integer produtoId, TipoPreco tipo){
 	    Produto produto = carrinhoService.find(produtoId);

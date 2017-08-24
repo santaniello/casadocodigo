@@ -1,5 +1,6 @@
 package br.com.casadocodigo.loja.models;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -34,15 +35,17 @@ public class Produto {
 	 */
 	@ElementCollection
 	private List<Preco> precos = new ArrayList<Preco>();
-	
-	/* O Spring faz a conversão do texto do form para uma data
-	*  no formato dd/MM/yyyy com a anotação @DateTimeFormat(pattern="dd/MM/yyyy") 
-	*/
-	@DateTimeFormat // não precisamos colocar o pattern pois configuramos na classe AppWebConfiguration
+
+	/*
+	 * O Spring faz a conversão do texto do form para uma data no formato
+	 * dd/MM/yyyy com a anotação @DateTimeFormat(pattern="dd/MM/yyyy")
+	 */
+	@DateTimeFormat // não precisamos colocar o pattern pois configuramos na
+					// classe AppWebConfiguration
 	private Calendar dataLancamento;
-		
+
 	private String sumarioPath;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -76,13 +79,13 @@ public class Produto {
 	}
 
 	public List<Preco> getPrecos() {
-		return  this.precos;
+		return this.precos;
 	}
 
 	public void adicionaPreco(Preco precos) {
 		this.precos.add(precos);
 	}
-		
+
 	public Calendar getDataLancamento() {
 		return dataLancamento;
 	}
@@ -90,7 +93,7 @@ public class Produto {
 	public void setDataLancamento(Calendar dataLancamento) {
 		this.dataLancamento = dataLancamento;
 	}
-		
+
 	public String getSumarioPath() {
 		return sumarioPath;
 	}
@@ -161,5 +164,10 @@ public class Produto {
 		} else if (!titulo.equals(other.titulo))
 			return false;
 		return true;
-	}	
+	}
+
+	public BigDecimal precoPara(TipoPreco tipoPreco) {
+		return precos.stream().filter(preco -> preco.getTipo().equals(tipoPreco)).findFirst().get().getValor();
+	}
+
 }
