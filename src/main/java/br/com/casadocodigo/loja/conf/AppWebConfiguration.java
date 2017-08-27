@@ -8,6 +8,7 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -97,4 +98,16 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
           .addResourceHandler("/resources/**")
           .addResourceLocations("/resources/"); 
     }
+	
+	
+
+	/**
+	 * Objeto nativo do Spring para trabalhar com requisições Rest...
+	 * */
+	@Bean
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
+	
+	
 }

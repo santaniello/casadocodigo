@@ -10,7 +10,8 @@
 </head>
 <body>
 	<h1>Lista de Produtos</h1>
-	<p> ${sucesso} </p>
+	<div> ${sucesso} </div>
+	<div> ${falha} </div>
 	<table>
 	    <tr>
 	        <td>Título</td>

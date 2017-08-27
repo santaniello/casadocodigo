@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -20,8 +21,11 @@ import org.springframework.web.context.WebApplicationContext;
  * 		Sempre que tivermos um objeto com escopo de sessão, é importante serializarmos ele pois o java o 
  * 		guardará na memória enquanto durar a sessão do usuário!	
  * 
+ * 		O proxyMode, é um proxy criado pelo Spring que vai envolver o objeto alvo (TARGET_CLASS)
+ *  	afim de possibilitar que as informações possam ser transitadas de um escopo para o outro. 
+ * 
  * */
-@Scope(value=WebApplicationContext.SCOPE_SESSION)
+@Scope(value=WebApplicationContext.SCOPE_SESSION,proxyMode=ScopedProxyMode.TARGET_CLASS)
 public class CarrinhoCompras implements Serializable{
 		
 	private static final long serialVersionUID = 1L;
@@ -57,6 +61,22 @@ public class CarrinhoCompras implements Serializable{
 			total = total.add(getTotal(item));			
 		}
 		return total;
+	}
+
+	public void remover(Long produtoId,TipoPreco tipoPreco) {
+		Produto produto = new Produto();
+		produto.setId(produtoId);
+		System.out.println("Id do produto a ser removido = " + produtoId);
+		System.out.println("Quantidade de itens = " + itens.size());
+		for (CarrinhoItem carrinhoItem : itens.keySet()) {
+			System.out.println("Id do Produto no carrinho " +carrinhoItem.getProduto().getId());
+			System.out.println("Tipo de preco no carrinho " +carrinhoItem.getTipoPreco());
+		}
+		
+		
+		itens.remove(new CarrinhoItem(produto, tipoPreco));	
+		System.out.println("Quantidade de itens após a remoção = " + itens.size());		
+		
 	}
 	
 }

@@ -12,7 +12,7 @@ import br.com.casadocodigo.loja.models.CarrinhoCompras;
 import br.com.casadocodigo.loja.models.CarrinhoItem;
 import br.com.casadocodigo.loja.models.Produto;
 import br.com.casadocodigo.loja.models.TipoPreco;
-import br.com.casadocodigo.loja.services.CarrinhoCompraService;
+import br.com.casadocodigo.loja.services.ProdutoService;
 
 @Controller
 @RequestMapping("/carrinho")
@@ -28,9 +28,9 @@ public class CarrinhoComprasController {
 	
 	@Autowired
     private CarrinhoCompras carrinho;
-	
+		
 	@Autowired
-	private CarrinhoCompraService carrinhoService;
+	private ProdutoService produtoService;
 	
 	@RequestMapping(value="/add", method = RequestMethod.POST)
 	public ModelAndView add(Integer produtoId, TipoPreco tipo){
@@ -47,8 +47,15 @@ public class CarrinhoComprasController {
 	
 	
 	private CarrinhoItem criaItem(Integer produtoId, TipoPreco tipo){
-	    Produto produto = carrinhoService.find(produtoId);
+	    Produto produto = produtoService.find(produtoId);
 	    CarrinhoItem carrinhoItem = new CarrinhoItem(produto, tipo);
 	    return carrinhoItem;
 	}	
+	
+	@RequestMapping(value="/remover",method=RequestMethod.POST)
+	public ModelAndView remover(Long produtoId,TipoPreco tipoPreco){
+		System.out.println("remover id = " + produtoId + "E Tipo = " + tipoPreco);
+		carrinho.remover(produtoId,tipoPreco);
+		return new ModelAndView("redirect:/carrinho");
+	}
 }
