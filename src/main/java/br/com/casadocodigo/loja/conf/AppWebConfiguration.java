@@ -1,5 +1,10 @@
 package br.com.casadocodigo.loja.conf;
 
+import java.util.concurrent.TimeUnit;
+
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,11 +21,14 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.google.common.cache.CacheBuilder;
+
 /**
  * Classe que será usada como classe de configuração do servlet do SpringMVC.
  */
 
 @EnableWebMvc // Habilita o SpringMVC
+@EnableCaching // Habilita o cache na aplicação
 @ComponentScan(basePackages = { "br.com.casadocodigo.loja.controllers", 
 								"br.com.casadocodigo.loja.daos",
 								"br.com.casadocodigo.loja.services",
@@ -107,6 +115,19 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
     public RestTemplate restTemplate(){
         return new RestTemplate();
+    }
+	
+	
+	/**
+	 * Criando um gerenciador de caches na aplicação...
+	 * */
+	@Bean
+    public CacheManager cacheManager() {
+        // return new ConcurrentMapCacheManager(); // Cache usado apenas para testes
+		CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder().maximumSize(100).expireAfterAccess(5, TimeUnit.MINUTES);
+        GuavaCacheManager manager = new GuavaCacheManager();
+        manager.setCacheBuilder(builder);
+        return manager;		
     }
 	
 	
