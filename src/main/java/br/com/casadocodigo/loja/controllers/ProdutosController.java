@@ -47,7 +47,7 @@ public class ProdutosController {
 		binder.addValidators(new ProdutoValidation());
 	}
 
-	@RequestMapping("/form")
+	@RequestMapping("/form/")
 	public ModelAndView form(Produto produto) {
 		ModelAndView modelAndView = new ModelAndView("produtos/form");
 		modelAndView.addObject("tipos", TipoPreco.values());

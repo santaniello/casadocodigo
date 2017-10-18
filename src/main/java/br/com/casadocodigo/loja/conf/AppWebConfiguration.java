@@ -39,7 +39,8 @@ import com.google.common.cache.CacheBuilder;
 								"br.com.casadocodigo.loja.daos",
 								"br.com.casadocodigo.loja.services",
 								"br.com.casadocodigo.loja.infra",
-								"br.com.casadocodigo.loja.models"}) // Classes que serão mapeadas pelo Spring...
+								"br.com.casadocodigo.loja.models"
+								}) // Classes que serão mapeadas pelo Spring...
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean

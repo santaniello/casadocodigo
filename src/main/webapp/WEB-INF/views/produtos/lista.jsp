@@ -28,6 +28,13 @@
 	        <li><a href="${s:mvcUrl('PC#listar').build()}">Lista de Produtos</a></li>
 	        <li><a href="${s:mvcUrl('PC#form').build()}">Cadastro de Produtos</a></li>
 	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+  			 <!-- Obtendo o nome do usuário logado na sessão -->
+<!--   			 <a href="#"> -->
+<%--         		<security:authentication property="principal" var="usuario"/> --%>
+<%--         		Usuário: ${usuario.username} --%>
+<!--     		 </a> -->
+		  </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div>
 	</nav>

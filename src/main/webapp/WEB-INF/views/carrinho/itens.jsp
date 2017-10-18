@@ -146,10 +146,6 @@
 		
 	<footer id="layout-footer">
 		<div class="clearfix container">
-
-
-
-
 			<div id="collections-footer">
 				<!-- cdc-footer -->
 				<p class="footer-title">Coleções de Programação</p>
