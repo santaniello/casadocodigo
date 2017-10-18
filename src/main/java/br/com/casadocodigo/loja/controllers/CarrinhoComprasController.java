@@ -34,7 +34,7 @@ public class CarrinhoComprasController {
 	
 	@RequestMapping(value="/add", method = RequestMethod.POST)
 	public ModelAndView add(Integer produtoId, TipoPreco tipo){
-	    ModelAndView modelAndView = new ModelAndView("redirect:/carrinho");
+	    ModelAndView modelAndView = new ModelAndView("redirect:/carrinho/");
 	    CarrinhoItem carrinhoItem = criaItem(produtoId, tipo);
 	    carrinho.add(carrinhoItem);
 	    return modelAndView;
