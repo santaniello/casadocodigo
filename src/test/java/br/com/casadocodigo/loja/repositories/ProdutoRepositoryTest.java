@@ -1,6 +1,7 @@
 package br.com.casadocodigo.loja.repositories;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 import java.util.List;
@@ -8,19 +9,21 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.casadocodigo.loja.builders.ProdutoBuilder;
-import br.com.casadocodigo.loja.conf.JPATestConfiguration;
+import br.com.casadocodigo.loja.conf.JPAConfiguration;
+import br.com.casadocodigo.loja.confs.DataSourceConfigurationTest;
 import br.com.casadocodigo.loja.models.Preco;
 import br.com.casadocodigo.loja.models.Produto;
 import br.com.casadocodigo.loja.models.TipoPreco;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = JPATestConfiguration.class, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {JPAConfiguration.class, ProdutoRepository.class, DataSourceConfigurationTest.class})
+@ActiveProfiles("test")
 @Transactional
 public class ProdutoRepositoryTest {
 
