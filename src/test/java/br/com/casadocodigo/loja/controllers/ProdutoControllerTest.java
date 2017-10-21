@@ -39,9 +39,8 @@ public class ProdutoControllerTest {
 	private MockMvc mockMvc;
 	
 	@Before
-	public void setup(){
-		
-	    mockMvc = MockMvcBuilders
+	public void setup(){		
+	   mockMvc = MockMvcBuilders
 	    		.webAppContextSetup(wac)
 	    		.addFilter(springSecurityFilterChain) //registrando o filtro do spring security...
 	    		.build();

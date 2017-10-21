@@ -6,6 +6,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration.Dynamic;
 
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -52,12 +53,18 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 	 * usando o valor "UTF-8", adicionar este filtro ao array de filtros e o
 	 * retornar esse array para o Spring.
 	 * 
+	 * 
+	 * O filtro OpenEntityManagerInViewFilter é uma solução que resolve o problema da Lazy Initialization
+	 * com o banco de dados pois ele mantém a sessão com o banco de dados até que a visualização da página 
+	 * seja carregada.
+	 * 
+	 * 
 	 **/
 	@Override
 	protected Filter[] getServletFilters() {
 		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
 		encodingFilter.setEncoding("UTF-8");
-		return new Filter[] { encodingFilter };
+		return new Filter[] { encodingFilter, new OpenEntityManagerInViewFilter() };
 	}
 
 	@Override

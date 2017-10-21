@@ -29,6 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //	    .antMatchers(HttpMethod.GET, "/produtos/").hasRole("ADMIN")
 	    .antMatchers("/produtos/**").hasRole("ADMIN")
 	    .antMatchers("/resources/**").permitAll()
+	    .antMatchers("/pagamento/**").permitAll()
 	    .antMatchers("/").permitAll()
 	    // informando que qualquer request tem de estar autenticado...
 	    .anyRequest().authenticated()

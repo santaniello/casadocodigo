@@ -23,9 +23,14 @@ public class ProdutoDAO {
 	public void gravar(Produto produto) {		
 		manager.persist(produto);		
 	}
-	
+	/* O comando join fetch faz com que os precos sejam carregados junto com os produtos, resolvendo o problema da Lazy Initialization... 
+	 * 
+	 * O problema do Lazy Initialization acontece por que ao tentar carregar os preços dos produtos,
+	 * a sessão com o banco de dados já tem sido encerrada.
+	 * 
+	 * */
 	public List<Produto> listar(){
-	    return manager.createQuery("select p from Produto p",Produto.class).getResultList();
+	    return manager.createQuery("select distinct(p) from Produto p join fetch p.precos",Produto.class).getResultList();
 	}
 
 	public Produto find(long id) {
